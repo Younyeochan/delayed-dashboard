@@ -67,14 +67,15 @@
         id="text-list"
         class="white--text"
       >
-        <h3
+        <h4
           lass="font-weight-bold white--text "
         >
+          Current Time<br>
           {{ today }}<br>
           <p class="text-caption">
             아래 데이터는 15분마다 갱신 됩니다.
           </p>
-        </h3>
+        </h4>
       </v-col>
       <v-col>
         <v-card
@@ -126,13 +127,14 @@
 
 <script>
 import dayjs from 'dayjs'
+
 export default {
   name: 'App',
   component: {
     dayjs
   },
   data: () => ({
-    today: dayjs().format("YYYY-MM-DD HH:mm:ss"),
+    today: dayjs().format("YYYY년MM월DD일 HH시mm분"),
     drawer: true,
     gradient: 'rgba(0,0,0,.7), rgba(0,0,0,.7)',
     items: [
@@ -148,10 +150,11 @@ export default {
 
 <style>
 #text-list {
-  margin-top: 20%;
+  margin-top: 10%;
   text-align: left;
 }
 #app {
   height: 100%;
+  background-color: #EFEFEF;
 }
 </style>

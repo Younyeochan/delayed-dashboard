@@ -19,7 +19,8 @@
     "vue-chartjs": "^4.0.0",
     "vue-router": "^3.5.3",
     "vue2-leaflet": "^2.7.1",
-    "vuetify": "^2.6.0"
+    "vuetify": "^2.6.0",
+    "vuex": "^4.1.0"
   },
   "devDependencies": {
     "@babel/core": "^7.12.16",

@@ -20,11 +20,10 @@
               rounded
               text
               class="float-right"
+              to="/map-container"
               @click="zoomIn"
             >
-              <router-link to="/map-container">
-                상세보기
-              </router-link>
+              상세보기
             </v-btn>
           </v-col>
         </v-row>

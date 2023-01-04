@@ -10,11 +10,10 @@
         rounded
         text
         class="float-right"
+        to="/"
         @click="zoomIn"
       >
-        <router-link to="/">
-          돌아가기
-        </router-link>
+        돌아가기
       </v-btn>
       <div class="text-caption text--primary">
         지체대상 교차로 130 개를 비교하여 분석할 수 있습니다.

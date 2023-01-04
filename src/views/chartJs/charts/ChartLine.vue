@@ -13,7 +13,9 @@ Chart.register(...registerables);
 
 export default ({
   props: [
+    // eslint-disable-next-line vue/require-prop-types
     'data',
+    // eslint-disable-next-line vue/require-prop-types
     'height',
   ],
   data(){

@@ -2,7 +2,7 @@
   <div>
     <a-row>
       <div align="center">
-        <!-- {{ cur24Hour }} -->
+        {{ cur24Hour }}
         <h6>{{ cur24HourAngle }}</h6>
       </div>
     </a-row>
@@ -66,7 +66,7 @@ export default {
   created() {
     this.interval = setInterval(() => {
       let date = new Date();
-      this.cur24HourAngle = 360 * date.getHours() / 24 + date.getMinutes() / 2 + '도';
+      this.cur24HourAngle = 360 * date.getHours() / 24 + date.getMinutes() / 2;
       this.cur24Hour = date.getHours() + ':' + date.getMinutes();
     }, 1000)
   }
