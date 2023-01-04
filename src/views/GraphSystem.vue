@@ -92,8 +92,8 @@
             </v-card-text>
 
             <v-card-text>
-              <div class="text-h4 font-weight-thin">
-                Sales Last 24h
+              <div class="text-h5 font-weight-black">
+                평균 지체 산정
               </div>
             </v-card-text>
 
@@ -110,19 +110,26 @@ const exhale = ms =>
   new Promise(resolve => setTimeout(resolve, ms))
 
 export default {
-  data: () => ({
-    checking: false,
-    heartbeats: [],
-    value: [
-      423,
-      446,
-      675,
-      510,
-      590,
-      610,
-      760,
-    ],
-  }),
+  data() {
+    return {
+      checking: false,
+      heartbeats: [],
+      value: [
+        423,
+        446,
+        675,
+        510,
+        590,
+        610,
+        760,
+        760,
+        510,
+        760,
+        423,
+        446,
+      ],
+    };
+  },
 
   computed: {
     avg () {

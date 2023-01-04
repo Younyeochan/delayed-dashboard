@@ -2,10 +2,10 @@
   <v-container>
     <v-row>
       <v-col>
-        <leaflet-map />
+        <bar-chart />
       </v-col>
       <v-col>
-        <bar-chart />
+        <leaflet-map />
       </v-col>
       <v-col>
         <doughnut-chart />

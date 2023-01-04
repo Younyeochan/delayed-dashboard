@@ -63,9 +63,22 @@
           </v-list-item-content>
         </v-list-item>
       </v-list>
+      <v-col
+        id="text-list"
+        class="white--text"
+      >
+        <h3
+          lass="font-weight-bold white--text "
+        >
+          {{ today }}<br>
+          <p class="text-caption">
+            아래 데이터는 15분마다 갱신 됩니다.
+          </p>
+        </h3>
+      </v-col>
       <v-col>
         <v-card
-          id="text-list"
+          color="#263238"
           width="95%"
         >
           <!-- 아래 실시간 데이터 바인딩해야합니다. -->
@@ -78,6 +91,7 @@
       </v-col>
       <v-col>
         <v-card
+          color="#263238"
           width="95%"
         >
           <!-- 아래 실시간 데이터 바인딩해야합니다. -->
@@ -90,6 +104,7 @@
       </v-col>
       <v-col>
         <v-card
+          color="#263238"
           width="95%"
         >
           <!-- 아래 실시간 데이터 바인딩해야합니다. -->
@@ -110,10 +125,15 @@
 </template>
 
 <script>
+import dayjs from 'dayjs'
 export default {
   name: 'App',
+  component: {
+    dayjs
+  },
   data: () => ({
-    drawer: false,
+    today: dayjs().format("YYYY-MM-DD HH:mm:ss"),
+    drawer: true,
     gradient: 'rgba(0,0,0,.7), rgba(0,0,0,.7)',
     items: [
       { title: 'Dashboard', icon: 'mdi-monitor-dashboard', to: '/' },
@@ -128,7 +148,8 @@ export default {
 
 <style>
 #text-list {
-  margin-top: 30%;
+  margin-top: 20%;
+  text-align: left;
 }
 #app {
   height: 100%;

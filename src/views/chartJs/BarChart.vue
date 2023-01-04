@@ -6,10 +6,10 @@
     <v-card-text>
       <v-row>
         <v-col>
-          <p class="text-h5 text--primary">
+          <p class="text-h5 text--primary font-weight-black">
             LOS 상위 TOP 10
           </p>
-          <div class="text-caption text--primary">
+          <div class="text-caption text--primary font-weight-light">
             오늘과 1주전, 2주전 데이터를 한눈에 볼 수 있습니다.
           </div>
         </v-col>
