@@ -10,7 +10,12 @@
             Two-week Data
           </p>
           <div class="text-caption text--primary font-weight-light">
+<<<<<<< Updated upstream
             하루 24시간 기준으로 15분씩 나눠 총 96개의 칸으로 구성되어있습니다.
+=======
+            1번째 원 : 1주일 전 <br> 2번째 원 : 오늘 <br> 3번째 원: 현재 시각을 나타냅니다.
+            <br> ※ 15분마다 한칸씩 이동합니다.
+>>>>>>> Stashed changes
           </div>
         </v-col>
         <v-col>
@@ -27,6 +32,7 @@
       </v-row>
     </v-card-text>
     <v-col>
+<<<<<<< Updated upstream
       <div
         style="position: relative; margin-top: 10px"
       >
@@ -42,29 +48,101 @@
           <hour-clock />
         </div>
       </div>
+=======
+      <canvas
+        id="canvas"
+        ref="doughnut"
+      />
+      <p class="inner-time">
+        {{ today }}
+      </p>
+>>>>>>> Stashed changes
     </v-col>
   </v-card>
 </template>
 
 <script>
-import { Chart, registerables } from 'chart.js';
+import {Chart, registerables} from 'chart.js'
+import dayjs from 'dayjs'
 
 Chart.register(...registerables);
 
+<<<<<<< Updated upstream
 import HourClock from '../../Utils/HourClock.vue' ;
+=======
+export default {
+  name: 'PieChart',
+  component: {
+    dayjs
+  },
+  data() {
+    return {
+      doughnutChart: null,
+      today: dayjs().format("HH:mm"),
+      timeInterval: null,
+>>>>>>> Stashed changes
 
-const CHART_COLORS = {
-  red: '#198972',
-  orange: '#4BA895',
-  yellow: '#C8DD9F',
-  green: '#F5D48F',
-  blue: '#F1B98C',
-  purple: '#E56F61',
-  grey: 'rgb(201, 203, 207)',
-};
+      labels: ['A', 'B', 'C', 'D', 'E', 'F', 'FF', 'FFF'],
+      datasets: [],
+      data: [10,10,10,10,10,10,10,10,10,10,10,10,
+        10,10,10,10,10,10,10,10,10,10,10,10,
+        10,10,10,10,10,10,10,10,10,10,10,10,
+        10,10,10,10,10,10,10,10,10,10,10,10,
+        10,10,10,10,10,10,10,10,10,10,10,10,
+        10,10,10,10,10,10,10,10,10,10,10,10,
+        10,10,10,10,10,10,10,10,10,10,10,10,
+        10,10,10,10,10,10,10,10,10,10,10,10,]
+    };
+  },
+  mounted() {
+    this.drawDoughnutChart();
+    setInterval(() => {
+      this.today = dayjs().format("HH:mm");
+    }, 1000)
+  },
 
-const COLOR_white = 'rgb(255, 255, 255)';
+  beforeDestroy() {
+    this.doughnutChart.destroy();
+  },
+  methods: {
+    drawDoughnutChart() {
+      let ctx = this.$refs.doughnut.getContext("2d");
+      this.doughnutChart = new Chart(ctx, {
+        type: "doughnut",
+        data: {
+          labels: this.labels,
+          datasets: [
+            {
+              data: this.data,
+              backgroundColor: ['#C8DD9F', '#C8DD9F', '#C8DD9F', '#C8DD9F', '#F5D48F', '#F5D48F', '#F5D48F', '#F5D48F', '#F5D48F', '#F5D48F', '#F1B98C', '#F5AEA7', '#F5AEA7','#C8DD9F', '#C8DD9F', '#F5D48F','#F5AEA7','#F5AEA7','#F5AEA7','#F5AEA7', '#F28376', '#F28376', '#F28376', '#F28376','#198972', '#C8DD9F', '#F5D48F', '#F28376', '#E56F61'],
+              borderWidth: 1
+            },
+            {
+              data: this.data,
+              backgroundColor: this.todayDataColor(),
+              borderWidth: 1
+            },
+            {
+              data: this.data,
+              backgroundColor: this.timeDataColor(),
+              borderColor: '#efefef',
+              borderWidth: 1
+            },
+          ]
+        },
+        options: {
+          responsive: false,
+          plugins: {
+            legend: {
+              display: false
+            }
+          }
+        }
+      })
+      this.doughnutChart.update('none')
+    },
 
+<<<<<<< Updated upstream
 const chart_data = [
   10, 10, 10, 10, 10, 10, 10, 10,
   10, 10, 10, 10, 10, 10, 10, 10,
@@ -85,53 +163,49 @@ const today_color_val = [
   0, 0, 0, 0, 0, 0, 0, 0,
   0, 0, 0, 0, 0, 0, 0, 0
 ];
+=======
+    todayDataColor() {
+      let color = []
+      let fillCnt = (new Date().getHours() * 4) + (parseInt(new Date().getMinutes() / 15));
 
-let today_color = [];
-const get_inner_bg_colors = () => {
-  today_color_val.forEach((value, index) => {
-    if (value >= 30) {
-      today_color.push(CHART_COLORS.red);
-    } else if (value >= 20) {
-      today_color.push(CHART_COLORS.orange);
-    } else if (value >= 10) {
-      today_color.push(CHART_COLORS.yellow);
-    } else {
-      today_color.push(CHART_COLORS.grey);
-    }
-  });
-  return today_color;
-}
+      this.data.forEach((d, i) => {
+        if (i < fillCnt) {
+          switch(i % 4) {
+          case 0:
+            color.push('#C8DD9F')
+            break;
+          case 1:
+            color.push('#F1B98C')
+            break;
+          case 2:
+            color.push('#4BA895')
+            break;
+          case 3:
+            color.push('#F28376')
+            break;
+          }
+        } else {
+          color.push('#E0E0E0')
+        }
+      })
+>>>>>>> Stashed changes
 
-let clock_color = [];
-const get_clock_bg_colors = () => {
-  today_color_val.forEach((value, index) => {
-    if (index == 59 || index == 60 || index == 61) {
-      clock_color.push(CHART_COLORS.grey);
-    } else {
-      clock_color.push(COLOR_white);
-    }
-  });
-  return clock_color;
-}
-
-const chartData = {
-  labels: [''],
-  datasets: [
-    {
-      data: chart_data,
-      backgroundColor: Object.values(CHART_COLORS),
+      return color
     },
-    {
-      data: chart_data,
-      backgroundColor: get_inner_bg_colors,
-    },
-    {
-      data: chart_data,
-      backgroundColor: get_clock_bg_colors,
-    },
-  ]
-};
 
+    timeDataColor() {
+      let color = [];
+      let fillCnt = (new Date().getHours() * 4) + (parseInt(new Date().getMinutes() / 15));
+
+      this.data.forEach((d, i) => {
+        if (i == fillCnt -1) {
+          color.push('#E0E0E0')
+        } else {
+          color.push('#FFF')
+        }
+      })
+
+<<<<<<< Updated upstream
 export default ({
   components : {
     HourClock
@@ -139,31 +213,21 @@ export default ({
   data(){
     return {
       data : chartData,
+=======
+      return color
+>>>>>>> Stashed changes
     }
   },
-  mounted () {
-    let ctx1 = this.$refs.chart1.getContext("2d");
-    this.chart_1 = new Chart(ctx1, {
-      type: 'doughnut',
-      data: this.data,
-      options: {
-        responsive: true,
-        plugins: {
-          legend: {
-            display: false,
-          },
-        },
-      },
-    });
-  },
-  beforeDestroy: function () {
-    this.chart_1.destroy();
-  },
-})
-
+};
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
+/* @media (max-width: 750px) {
+  #canvas {
+    max-width: 100%;
+    max-height: 100%;
+  }
+} */
 	.inner_clock {
 		width: 40%;
 		height: 40%;
@@ -172,11 +236,23 @@ export default ({
 		left: 50%;
 		transform: translate(-50%, -50%);
 	}
+
   #canvas {
-    max-width: 90vw;
-    max-height: 34vh;
     position: relative;
     left: 50%;
     transform: translateX(-50%);
+    max-width: 100%;
+    max-height: 100%;
+  }
+
+  .inner-time {
+    width: 40%;
+		height: 40%;
+		position: absolute;
+		top: 80.5%;
+		left: 63.5%;
+    font-size: 25px;
+		transform: translate(-50%, -50%);
+    font-weight: 900;
   }
 </style>

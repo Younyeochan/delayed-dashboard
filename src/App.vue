@@ -67,7 +67,11 @@
         id="text-list"
         class="white--text"
       >
+<<<<<<< Updated upstream
         <h4
+=======
+        <h5
+>>>>>>> Stashed changes
           lass="font-weight-bold white--text "
         >
           Current Time<br>
@@ -75,7 +79,11 @@
           <p class="text-caption">
             아래 데이터는 15분마다 갱신 됩니다.
           </p>
+<<<<<<< Updated upstream
         </h4>
+=======
+        </h5>
+>>>>>>> Stashed changes
       </v-col>
       <v-col>
         <v-card
@@ -134,7 +142,11 @@ export default {
     dayjs
   },
   data: () => ({
+<<<<<<< Updated upstream
     today: dayjs().format("YYYY년MM월DD일 HH시mm분"),
+=======
+    today: dayjs().format("YYYY년MM월DD일 HH시mm분ss초"),
+>>>>>>> Stashed changes
     drawer: true,
     gradient: 'rgba(0,0,0,.7), rgba(0,0,0,.7)',
     items: [
@@ -145,6 +157,11 @@ export default {
     ],
     right: null,
   }),
+  mounted() {
+    setInterval(() => {
+      this.today = dayjs().format("YYYY년MM월DD일 HH시mm분ss초");
+    }, 1000)
+  }
 };
 </script>
 

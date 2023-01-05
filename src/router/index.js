@@ -4,6 +4,7 @@ import Dashbard from '@/views/Dashbard'
 import GraphSystem from '@/views/GraphSystem'
 import MapContainer from '@/views/MapContainer'
 import Typography from '@/views/Typography'
+import LoginPage from '../LoginPage'
 
 Vue.use(VueRouter)
 
@@ -12,6 +13,11 @@ const routes = [
     path: '/',
     name: 'Dashboard',
     component: Dashbard
+  },
+  {
+    path: '/login',
+    name: 'Login',
+    component: LoginPage
   },
   {
     path: '/graph-system',

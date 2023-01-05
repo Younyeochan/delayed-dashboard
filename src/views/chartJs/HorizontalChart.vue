@@ -7,10 +7,10 @@
       <v-row>
         <v-col>
           <p class="text-h5 text--primary font-weight-black">
-            지체시간 데이터
+            LOS Intersection Status
           </p>
           <div class="text-caption text--primary font-weight-light">
-            오늘과 당일 전 데이터를 시간에 맞춰 비교하여 분석할 수 있습니다.
+            LOS 등급 별 교차로 개수 이력을 확인할 수 있습니다.
           </div>
         </v-col>
       </v-row>
