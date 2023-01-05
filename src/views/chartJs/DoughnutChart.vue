@@ -10,12 +10,8 @@
             Two-week Data
           </p>
           <div class="text-caption text--primary font-weight-light">
-<<<<<<< Updated upstream
-            하루 24시간 기준으로 15분씩 나눠 총 96개의 칸으로 구성되어있습니다.
-=======
             1번째 원 : 1주일 전 <br> 2번째 원 : 오늘 <br> 3번째 원: 현재 시각을 나타냅니다.
             <br> ※ 15분마다 한칸씩 이동합니다.
->>>>>>> Stashed changes
           </div>
         </v-col>
         <v-col>
@@ -32,23 +28,6 @@
       </v-row>
     </v-card-text>
     <v-col>
-<<<<<<< Updated upstream
-      <div
-        style="position: relative; margin-top: 10px"
-      >
-        <canvas
-          id="canvas"
-          ref="chart1"
-        />
-        <div
-          class="inner_clock"
-          align="center"
-          style="background: transparent; border-color: transparent;"
-        >
-          <hour-clock />
-        </div>
-      </div>
-=======
       <canvas
         id="canvas"
         ref="doughnut"
@@ -56,7 +35,6 @@
       <p class="inner-time">
         {{ today }}
       </p>
->>>>>>> Stashed changes
     </v-col>
   </v-card>
 </template>
@@ -67,9 +45,6 @@ import dayjs from 'dayjs'
 
 Chart.register(...registerables);
 
-<<<<<<< Updated upstream
-import HourClock from '../../Utils/HourClock.vue' ;
-=======
 export default {
   name: 'PieChart',
   component: {
@@ -80,7 +55,6 @@ export default {
       doughnutChart: null,
       today: dayjs().format("HH:mm"),
       timeInterval: null,
->>>>>>> Stashed changes
 
       labels: ['A', 'B', 'C', 'D', 'E', 'F', 'FF', 'FFF'],
       datasets: [],
@@ -142,28 +116,6 @@ export default {
       this.doughnutChart.update('none')
     },
 
-<<<<<<< Updated upstream
-const chart_data = [
-  10, 10, 10, 10, 10, 10, 10, 10,
-  10, 10, 10, 10, 10, 10, 10, 10,
-  10, 10, 10, 10, 10, 10, 10, 10,
-  10, 10, 10, 10, 10, 10, 10, 10,
-  10, 10, 10, 10, 10, 10, 10, 10,
-  10, 10, 10, 10, 10, 10, 10, 10,
-  10, 10, 10, 10, 10, 10, 10, 10,
-  10, 10, 10, 10, 10, 10, 10, 10
-];
-
-const today_color_val = [
-  0, 0, 0, 0, 0, 0, 0, 0,
-  0, 0, 0, 0, 0, 0, 0, 0,
-  0, 0, 0, 0, 0, 0, 0, 0,
-  0, 0, 0, 0, 0, 0, 0, 0,
-  0, 0, 0, 0, 0, 0, 0, 0,
-  0, 0, 0, 0, 0, 0, 0, 0,
-  0, 0, 0, 0, 0, 0, 0, 0
-];
-=======
     todayDataColor() {
       let color = []
       let fillCnt = (new Date().getHours() * 4) + (parseInt(new Date().getMinutes() / 15));
@@ -188,7 +140,6 @@ const today_color_val = [
           color.push('#E0E0E0')
         }
       })
->>>>>>> Stashed changes
 
       return color
     },
@@ -205,17 +156,7 @@ const today_color_val = [
         }
       })
 
-<<<<<<< Updated upstream
-export default ({
-  components : {
-    HourClock
-  },
-  data(){
-    return {
-      data : chartData,
-=======
       return color
->>>>>>> Stashed changes
     }
   },
 };

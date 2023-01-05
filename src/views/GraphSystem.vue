@@ -3,7 +3,7 @@
     <v-col>
       <v-col>
         <h2>
-          Two-week Data
+          지체시간 데이터
         </h2>
         <v-btn
           x-small
@@ -17,7 +17,7 @@
           돌아가기
         </v-btn>
         <div class="text-caption text--primary">
-          하루 24시간 기준으로 15분씩 나눠 총 96개의 칸으로 구성되어있습니다.
+          오늘과 당일 전 데이터를 시간에 맞춰 비교하여 분석할 수 있습니다.
         </div>
       </v-col>
       <v-row>

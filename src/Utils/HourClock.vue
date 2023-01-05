@@ -3,11 +3,7 @@
     <a-row>
       <div align="center">
         {{ cur24Hour }}
-<<<<<<< Updated upstream
-        <h6>{{ cur24HourAngle }}</h6>
-=======
         <!-- <h6>{{ cur24HourAngle }}</h6> -->
->>>>>>> Stashed changes
       </div>
     </a-row>
 
