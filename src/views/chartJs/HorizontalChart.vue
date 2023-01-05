@@ -2,6 +2,7 @@
   <v-card
     width="480px"
     height="500px"
+    elevation="5"
   >
     <v-card-text>
       <v-row>
@@ -16,165 +17,110 @@
       </v-row>
     </v-card-text>
     <v-col>
-      <canvas
-        ref="chart1"
-        width="100vw"
-        height="80vh"
+      <apexchart
+        type="bar"
+        width="100%"
+        height="235%"
+        :options="chartOptions"
+        :series="series"
       />
     </v-col>
   </v-card>
 </template>
 
 <script>
-import { Chart, registerables } from 'chart.js';
+import VueApexCharts from "vue-apexcharts";
 
-Chart.register(...registerables);
-
-const CHART_COLORS = {
-  red: '#198972',
-  orange: '#4BA895',
-  yellow: '#C8DD9F',
-  green: '#F5D48F',
-  blue: '#F1B98C',
-  purple: '#E56F61',
-};
-
-const chartData = {
-  labels: ['11:00', '11:15', '11:30', '11:45', '12:00','12:15','12:30', '12:45', '13:00', '13:15', '13:30','13:45'],
-  datasets: [
-    {
-      label: '11:00',
-      data: [10,10,10,10,10,10,10,10,10,10,10,10],
-      borderColor: CHART_COLORS.grey,
-      backgroundColor: CHART_COLORS.red,
-      barThickness: 16,
-    },
-    {
-      label: '11:15',
-      data: [10,10,10,10,10,10,10,10,10,10,10,10],
-      borderColor: CHART_COLORS.grey,
-      backgroundColor: CHART_COLORS.orange,
-      barThickness: 16,
-    },
-    {
-      label: '11:30',
-      data: [10,10,10,10,10,10,10,10,10,10,10,10],
-      borderColor: CHART_COLORS.grey,
-      backgroundColor: CHART_COLORS.yellow,
-      barThickness: 16,
-    },
-    {
-      label: '11:45',
-      data: [10,10,10,10,10,10,10,10,10,10,10,10],
-      borderColor: CHART_COLORS.grey,
-      backgroundColor: CHART_COLORS.green,
-      barThickness: 16,
-    },
-    {
-      label: '12:00',
-      data: [10,10,10,10,10,10,10,10,10,10,10,10],
-      borderColor: CHART_COLORS.grey,
-      barThickness: 16,
-    },
-    {
-      label: '12:15',
-      data: [10,10,10,10,10,10,10,10,10,10,10,10],
-      borderColor: CHART_COLORS.grey,
-      backgroundColor: CHART_COLORS.red,
-      barThickness: 16,
-    },
-    {
-      label: '12:30',
-      data: [10,10,10,10,10,10,10,10,10,10,10,10],
-      borderColor: CHART_COLORS.grey,
-      backgroundColor: CHART_COLORS.orange,
-      barThickness: 16,
-    },
-    {
-      label: '12:45',
-      data: [10,10,10,10,10,10,10,10,10,10,10,10],
-      borderColor: CHART_COLORS.grey,
-      backgroundColor: CHART_COLORS.purple,
-      barThickness: 16,
-    },
-    {
-      label: '13:00',
-      data: [10,10,10,10,10,10,10,10,10,10,10,10],
-      borderColor: CHART_COLORS.grey,
-      backgroundColor: CHART_COLORS.red,
-      barThickness: 16,
-    },
-    {
-      label: '13:15',
-      data: [10,10,10,10,10,10,10,10,10,10,10,10],
-      borderColor: CHART_COLORS.grey,
-      backgroundColor: CHART_COLORS.purple,
-      barThickness: 16,
-    },
-    {
-      label: '13:30',
-      data: [10,10,10,10,10,10,10,10,10,10,10,10],
-      borderColor: CHART_COLORS.grey,
-      backgroundColor: CHART_COLORS.blue,
-      barThickness: 16,
-    },
-    {
-      label: '13:45',
-      data: [10,10,10,10,10,10,10,10,10,10,10,10],
-      borderColor: CHART_COLORS.grey,
-      backgroundColor: CHART_COLORS.green,
-      barThickness: 16,
-    },
-  ]
-};
-
-export default ({
-  data(){
-    return {
-      data : chartData,
-    }
+export default {
+  name: "Bar",
+  components: {
+    apexchart: VueApexCharts,
   },
-  mounted () {
-    let ctx1 = this.$refs.chart1.getContext("2d");
-    this.chart_1 = new Chart(ctx1, {
-      type: 'bar',
-      data: this.data,
-      options: {
-        responsive: true,
-        indexAxis: 'y',
-        scales: {
-          x: {
-            stacked: true,
-            ticks: {
-              font: {
-                weight: 'bold',
-                size: 14,
-              },
-            },
+  data() {
+    return {
+      series: [
+        {
+          name: '군포역',
+          data: [10, 20, 25, 20, 25]
+        },
+        {
+          name: '금정역',
+          data: [5, 10, 30, 35, 20]
+        },
+        {
+          name: '산본역',
+          data: [20, 20, 20, 20, 20]
+        },
+        {
+          name: '명학역',
+          data: [20, 20, 20, 20, 20]
+        },
+        {
+          name: '안양역',
+          data: [20, 20, 20, 20, 20]
+        },
+      ],
+      chartOptions: {
+        chart: {
+          type: 'bar',
+          height: 350,
+          stacked: true,
+          stackType: '100%'
+        },
+        plotOptions: {
+          bar: {
+            horizontal: true,
+            dataLabels: {
+              total: {
+                // 마지막 %를 지울 수 있어요 ↓
+                enabled: false,
+                offsetX: 0,
+                style: {
+                  fontSize: '13px',
+                  fontWeight: 900
+                }
+              }
+            }
           },
-          y: {
-            stacked: true,
-            ticks: {
-              font: {
-                weight: 'bold',
-                size: 14,
-              },
-            },
+        },
+        xaxis: {
+          categories: ['09:00', '09:15', '09:30', '09:45', '10:00'],
+          labels: {
+            formatter: function (val) {
+              return val + "분"
+            }
           }
         },
-        plugins: {
-          legend: {
-            display: false,
+        yaxis: {
+          title: {
+            text: undefined
           },
         },
+        tooltip: {
+          y: {
+            formatter: function (val) {
+              return val + "분"
+            }
+          }
+        },
+        fill: {
+          opacity: 1,
+        },
+        legend: {
+          position: 'top',
+          horizontalAlign: 'left',
+          offsetX: 40,
+        },
+        // 위에 5개 네모 색 채우기입니다.
+        colors : ['#198972', '#C8DD9F', '#F5D48F', '#F28376', '#E56F61'],
       },
-    });
-  },
-  // Right before the component is destroyed,
-  // also destroy the chart.
-  beforeDestroy: function () {
-    this.chart_1.destroy();
-  },
-})
-
+    }
+  }
+}
 </script>
+
+<style>
+.apexcharts-toolbar {
+  display: none;
+}
+</style>

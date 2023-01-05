@@ -3,6 +3,7 @@
     <v-card
       width="480px"
       height="500px"
+      elevation="5"
     >
       <v-card-text>
         <v-row>

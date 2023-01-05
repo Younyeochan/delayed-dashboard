@@ -2,6 +2,7 @@
   <v-card
     width="480px"
     height="500px"
+    elevation="5"
   >
     <v-card-text>
       <v-row>
@@ -16,88 +17,56 @@
       </v-row>
     </v-card-text>
     <v-col>
-      <Pie
-        :chart-options="chartOptions"
-        :chart-data="chartData"
-        :chart-id="chartId"
-        :dataset-id-key="datasetIdKey"
-        :plugins="plugins"
-        :css-classes="cssClasses"
-        :styles="styles"
-        :width="width"
-        :height="height"
+      <apexchart
+        type="pie"
+        :options="chartOptions"
+        :series="series"
       />
     </v-col>
   </v-card>
 </template>
 
 <script>
-import { Pie } from 'vue-chartjs/legacy'
-
-import {
-  Chart as ChartJS,
-  Title,
-  Tooltip,
-  Legend,
-  ArcElement,
-  CategoryScale
-} from 'chart.js'
-
-ChartJS.register(Title, Tooltip, Legend, ArcElement, CategoryScale)
-
 export default {
   name: 'PieChart',
-  components: {
-    Pie
-  },
-  props: {
-    chartId: {
-      type: String,
-      default: 'pie-chart'
-    },
-    datasetIdKey: {
-      type: String,
-      default: 'label'
-    },
-    width: {
-      type: Number,
-      default: 360
-    },
-    height: {
-      type: Number,
-      default: 340
-    },
-    cssClasses: {
-      default: '',
-      type: String
-    },
-    styles: {
-      type: Object,
-      default: () => {}
-    },
-    plugins: {
-      type: Array,
-      default: () => []
-    }
-  },
   data() {
     return {
-      chartData: {
-        labels: ['산본역', '군포역', '금정역', '안양역'],
-        legend: {
-          display: true
-        },
-        datasets: [
-          {
-            backgroundColor: ['#4BA895', '#C8DD9F', '#F5D48F', '#F28376'],
-            data: [40, 20, 80, 10]
-          }
-        ]
-      },
+      series: [10, 20, 10, 30, 30],
       chartOptions: {
-        responsive: true,
-        maintainAspectRatio: false
-      }
+        chart: {
+          width: '100%',
+          type: 'pie',
+        },
+        labels: ["금정역", "명학역", "안양역", "군포역", "산본역"],
+        theme: {
+          monochrome: {
+            enabled: false
+          }
+        },
+        plotOptions: {
+          pie: {
+            dataLabels: {
+              offset: -5
+            }
+          }
+        },
+        legend: {
+          position: 'top',
+          horizontalAlign: 'left',
+          offsetX: 50,
+        },
+        dataLabels: {
+          formatter(val, opts) {
+            const name = opts.w.globals.labels[opts.seriesIndex]
+            return [name, val.toFixed(1) + '분']
+          }
+        },
+        fill: {
+          opacity: 1,
+          colors : ['#198972', '#C8DD9F', '#F5D48F', '#F28376', '#E56F61'],
+        },
+        colors : ['#198972', '#C8DD9F', '#F5D48F', '#F28376', '#E56F61'],
+      },
     }
   }
 };

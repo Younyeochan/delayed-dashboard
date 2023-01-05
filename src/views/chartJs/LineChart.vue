@@ -2,63 +2,125 @@
   <v-card
     width="480px"
     height="500px"
+    elevation="5"
   >
     <v-card-text>
-      <v-row>
-        <v-col>
-          <p class="text-h5 text--primary font-weight-black">
-            지체시간 데이터
-          </p>
-          <div class="text-caption text--primary font-weight-light">
-            오늘과 당일 전 데이터를 시간에 맞춰 비교하여 분석할 수 있습니다.
-          </div>
-        </v-col>
-      </v-row>
+      <v-col>
+        <p class="text-h5 text--primary font-weight-black">
+          지체시간 데이터
+        </p>
+        <div class="text-caption text--primary font-weight-light">
+          오늘과 1주전, 2주전 데이터를 한눈에 볼 수 있습니다.
+        </div>
+      </v-col>
     </v-card-text>
     <v-col>
-      <chart-line
-        :height="height"
-        :data="chartData"
+      <apexchart
+        type="line"
+        height="350"
+        :options="chartOptions"
+        :series="series"
       />
     </v-col>
   </v-card>
 </template>
 
 <script>
+import VueApexCharts from "vue-apexcharts";
 
-// Bar chart for "Active Users" card.
-import ChartLine from './charts/ChartLine.vue' ;
-
-export default ({
+export default {
+  name: 'LineChart',
   components: {
-    ChartLine,
+    apexchart: VueApexCharts,
   },
   data() {
     return {
-      chartData: {
-        labels: ["07:15", "07:30", "07:45", "08:00", "08:15", "08:30", "08:45", "09:00", "09:15", "09:30", "09:45", "10:00"],
-        datasets: [{
-          label: "1주일전",
-          tension: 0,
-          pointRadius: 2,
-          borderColor: "#1890FF",
-          borderWidth: 6,
-          data: [50, 40, 300, 220, 500, 250, 400, 230, 500, 400, 230, 500],
-          maxBarThickness: 6
-        },
-        {
-          label: "오늘",
-          tension: 0,
-          pointRadius: 2,
-          borderColor: "#B37FEB",
-          borderWidth: 6,
-          data: [30, 90, 40, 140, 290, 290, 340, 230, 400, 340, 230, 400],
-          maxBarThickness: 6
-        }],
+
+      series: [{
+        name: "이번 주",
+        data: [45, 52, 38, 24, 33, 26, 21, 20, 6]
       },
-      height: 330
+      {
+        name: "1주 전",
+        data: [35, 41, 62, 42, 13, 18, 29, 37, 36]
+      },
+      {
+        name: '2주 전',
+        data: [87, 57, 74, 99, 75, 38, 62, 47, 82]
+      }
+      ],
+      chartOptions: {
+        chart: {
+          height: 350,
+          type: 'line',
+          zoom: {
+            enabled: false
+          },
+        },
+        dataLabels: {
+          enabled: false
+        },
+        stroke: {
+          width: [5, 7, 5],
+          curve: 'straight',
+          dashArray: [0, 8, 5]
+        },
+        legend: {
+          tooltipHoverFormatter: function(val, opts) {
+            return val + ' - ' + opts.w.globals.series[opts.seriesIndex][opts.dataPointIndex] + ''
+          }
+        },
+        markers: {
+          size: 0,
+          hover: {
+            sizeOffset: 6
+          }
+        },
+        xaxis: {
+          categories: ['09:00', '09:15', '09:30', '09:45', '10:00', '10:15', '10:30', '10:45', '11:00'],
+        },
+        legend: {
+          position: 'top',
+          horizontalAlign: 'left',
+          offsetX: 120,
+        },
+        tooltip: {
+          y: [
+            {
+              title: {
+                formatter: function (val) {
+                  return val
+                }
+              }
+            },
+            {
+              title: {
+                formatter: function (val) {
+                  return val
+                }
+              }
+            },
+            {
+              title: {
+                formatter: function (val) {
+                  return val;
+                }
+              }
+            }
+          ]
+        },
+        grid: {
+          borderColor: '#f1f1f1',
+        },
+        colors : ['#198972', '#C8DD9F', '#F5D48F'],
+      },
     }
   },
-})
-
+}
 </script>
+
+<style>
+.apexcharts-toolbar {
+  display: none;
+}
+</style>

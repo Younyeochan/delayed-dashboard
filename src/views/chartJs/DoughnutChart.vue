@@ -2,6 +2,7 @@
   <v-card
     width="480px"
     height="500px"
+    elevation="5"
   >
     <v-card-text>
       <v-row>
@@ -88,7 +89,9 @@ export default {
           datasets: [
             {
               data: this.data,
-              backgroundColor: ['#C8DD9F', '#C8DD9F', '#C8DD9F', '#C8DD9F', '#F5D48F', '#F5D48F', '#F5D48F', '#F5D48F', '#F5D48F', '#F5D48F', '#F1B98C', '#F5AEA7', '#F5AEA7','#C8DD9F', '#C8DD9F', '#F5D48F','#F5AEA7','#F5AEA7','#F5AEA7','#F5AEA7', '#F28376', '#F28376', '#F28376', '#F28376','#198972', '#C8DD9F', '#F5D48F', '#F28376', '#E56F61'],
+              backgroundColor: ['#C8DD9F', '#C8DD9F', '#C8DD9F', '#C8DD9F', '#F5D48F', '#F5D48F', '#F5D48F', '#F5D48F', '#F5D48F', '#F5D48F', '#F1B98C', '#F5AEA7', '#F5AEA7'
+                ,'#C8DD9F', '#C8DD9F', '#F5D48F','#F5AEA7','#F5AEA7','#F5AEA7','#F5AEA7', '#F28376',
+                '#F28376', '#F28376', '#F28376','#198972', '#C8DD9F', '#F5D48F', '#F28376', '#E56F61'],
               borderWidth: 1
             },
             {

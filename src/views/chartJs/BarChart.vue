@@ -2,6 +2,7 @@
   <v-card
     width="480px"
     height="500px"
+    elevation="5"
   >
     <v-card-text>
       <v-row>
@@ -16,180 +17,106 @@
       </v-row>
     </v-card-text>
     <v-col>
-      <canvas
-        ref="chart1"
-        width="69vw"
-        height="54vh"
+      <apexchart
+        type="bar"
+        height="380"
+        :options="chartOptions"
+        :series="series"
       />
     </v-col>
   </v-card>
 </template>
 
 <script>
-import { Chart, registerables } from 'chart.js';
+import VueApexCharts from "vue-apexcharts";
 
-Chart.register(...registerables);
-
-const CHART_COLORS = {
-  red: 'rgb(255, 99, 132)',
-  orange: 'rgb(255, 159, 64)',
-  yellow: 'rgb(255, 205, 86)',
-  green: 'rgb(75, 192, 192)',
-  blue: 'rgb(54, 162, 235)',
-  purple: 'rgb(153, 102, 255)',
-  grey: 'rgb(201, 203, 207)'
-};
-
-const delay_data = [400,380,375,370,360,350,340,340,330,330,];
-
-let data_color = [];
-const delay_color = () => {
-  delay_data.forEach((value, index) => {
-    if (value >= 380) {
-      data_color.push(CHART_COLORS.red);
-    } else if (value >= 360) {
-      data_color.push(CHART_COLORS.orange);
-    } else {
-      data_color.push(CHART_COLORS.yellow);
-    }
-  });
-  return data_color;
-}
-
-
-const chartData = {
-  labels: [
-    '수리산역', '금정역', '명학역', '범계역', '안양역', '평촌역',
-    '관악역','당정역','군포역','산본역',
-  ],
-  datasets: [
-    {
-      xAxisID : 'A_DATA',
-      label: '주기',
-      data: [30,28,30,27,25,27,25,24,23,20,],
-      borderColor: CHART_COLORS.green,
-      backgroundColor: CHART_COLORS.green,
-      barThickness: 10,
-    },
-    {
-      xAxisID : 'B_DATA',
-      label: '지체시간(s/h)',
-      data: delay_data,
-      borderColor: delay_color,
-      backgroundColor: delay_color,
-      barThickness: 10,
-    }
-  ]
-};
-
-export default ({
-  data(){
-    return {
-      data : chartData,
-      interval : 10000,
-    }
+export default {
+  name: "Bar",
+  components: {
+    apexchart: VueApexCharts,
   },
-  mounted () {
-    let ctx1 = this.$refs.chart1.getContext("2d");
-    this.chart_1 = new Chart(ctx1, {
-      type: 'bar',
-      data: this.data,
-      options: {
-        indexAxis: 'y',
-        elements: {
+  data() {
+    return {
+
+      series: [{
+        name: '이번 주',
+        data: [0.4, 0.65, 0.76, 0.88, 3.8, 3.9, 4.2, 1.5, 2.1, 2.9]
+      },
+      {
+        name: '지난 주',
+        data: [-0.8, -1.05, -1.06, -3.7, -3.96, -4.22, -1.18, -1.4, -2.2, -2.85]
+      }
+      ],
+      chartOptions: {
+        chart: {
+          type: 'bar',
+          height: 440,
+          stacked: true
+        },
+        colors: ['#198972', '#E56F61'],
+        plotOptions: {
           bar: {
-            borderWidth: 2,
+            horizontal: true,
+            barHeight: '80%',
+          },
+        },
+        dataLabels: {
+          enabled: false
+        },
+        stroke: {
+          width: 1,
+          colors: ["#fff"]
+        },
+
+        grid: {
+          xaxis: {
+            lines: {
+              show: false
+            }
           }
         },
-        responsive: true,
-        plugins: {
-          legend: {
-            display: false,
+        yaxis: {
+          min: -5,
+          max: 5,
+          title: {
+            // text: 'Age',
           },
         },
-        scales: {
+        tooltip: {
+          shared: false,
           x: {
-            ticks: {
-              display: false,
-            },
-            grid: {
-              display: false
-            },
+            formatter: function (val) {
+              return val
+            }
           },
           y: {
-            ticks: {
-              font: {
-                weight: 'bold',
-                size: 11,
-              },
-            },
-            grid: {
-              display: false
-            },
-          },
-          A_DATA: {
-            title: {
-              display: true,
-              text: '주기',
-              font: {
-                weight: 'bold',
-                size: 10,
-              },
-              color: 'green'
-            },
-            type: 'linear',
-        					position: 'top',
-            ticks: {
-              font: {
-                weight: 'bold',
-                size: 10,
-              },
-              display: true,
-              beginAtZero: true,
-              color: 'green'
-            },
-            max:50,
-          },
-          B_DATA: {
-            title: {
-              display: true,
-              text: '지체시간(s/h)',
-              font: {
-                weight: 'bold',
-                size: 10,
-              },
-              color: 'grey'
-            },
-            type: 'linear',
-        					position: 'bottom',
-            ticks: {
-              font: {
-                weight: 'bold',
-                size: 10,
-              },
-              display: true,
-              beginAtZero: true,
-              color: 'grey'
-            },
-            grid: {
-              display: false
-            },
-          },
+            formatter: function (val) {
+              return Math.abs(val) + "분"
+            }
+          }
+        },
+        xaxis: {
+          categories: [
+            '금정역', '군포역', '당정역', '명학역', '안양역', '관악역', '석수역', '수리산역', '성균관대역', '대야미역'
+          ],
+          labels: {
+            formatter: function (val) {
+              return Math.abs(Math.round(val)) + "분"
+            }
+          }
+        },
+        legend: {
+          position: 'top',
+          horizontalAlign: 'center',
         },
       },
-    });
+    }
   },
-  created() {
-    // this.interval = setInterval(() => {
-    // 	console.log('timer');
-    // }, this.interval)
-  },
-  // Right before the component is destroyed,
-  // also destroy the chart.
-  beforeDestroy: function () {
-    this.chart_1.destroy();
-    clearInterval(this.interval);
-  },
-})
-
+}
 </script>
+
+<style>
+.apexcharts-toolbar {
+  display: none !important;
+}
+</style>

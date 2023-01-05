@@ -4,6 +4,7 @@
       app
       color="primary"
       dark
+      height="60"
       style="z-index: 10000"
     >
       <v-app-bar-nav-icon @click="drawer = !drawer" />
