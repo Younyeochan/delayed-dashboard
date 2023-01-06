@@ -6,6 +6,7 @@
       dark
       height="60"
       style="z-index: 10000"
+      hide-on-scroll
     >
       <v-app-bar-nav-icon @click="drawer = !drawer" />
       <v-app-bar-title class="font-weight-bold">

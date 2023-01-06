@@ -1,6 +1,9 @@
 <template>
   <v-container>
-    <v-row>
+    <v-row
+      :key="n"
+      :cols="n === 1 ? 8 : 4"
+    >
       <v-col>
         <bar-chart />
       </v-col>
@@ -17,7 +20,7 @@
         <pie-chart />
       </v-col>
       <v-col>
-        <HorizontalChart />
+        <horizontal-chart />
       </v-col>
     </v-row>
   </v-container>
