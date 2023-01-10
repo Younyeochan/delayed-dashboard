@@ -1,0 +1,15 @@
+{
+    "tscs_host_inet": "192.168.219.71",
+    "tscs_status_port": 12021,
+    "tscs_control_port": 12021,
+    "tscs_host_interval": 1000,
+    "tscs_retry_interval": 10000,
+    "tscs_header_size": 32,
+    "tscs_sa_info_size": 76,
+    "tscs_lc_info_size": 107,
+    "tscs_sa_max": 400,
+    "tscs_lc_max": 1024,
+    "tscs_is_big_endian": false,
+    "tscs_comment": "host_interval, retry_interval Unit is ms(millisecond)."
+  }
+  
